@@ -1,5 +1,10 @@
 package com.theironyard;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 /**
  * The ConversionService is responsible for converting values between units. It
  * also can provide a list of units it can convert between (in String form).
@@ -37,6 +42,9 @@ public class ConversionService {
      * @return A ArrayList of lowercase Strings containing valid units. All underscores are replaced with spaces.
      */
     // todo: create listUnits() method
+    public ArrayList<String> listUnits(){
+        return new ArrayList<>(Arrays.stream(Weight.values()).map(weight -> weight.toString().toLowerCase().replaceAll("_", " ")).collect(Collectors.toList()));
+    }
 
 
 
@@ -69,7 +77,11 @@ public class ConversionService {
      * @return the converted weight
      */
     // todo: create convert() method
+    public double convert(double weight, Weight from, Weight to){
+        double asGrams = weight * from.getGrams();
+        return asGrams / to.getGrams();
 
+    }
 
 
 }
